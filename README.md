@@ -5,7 +5,8 @@
 
 ### 1. Crear el virtual environment
 ```bash
-python3.12 -m venv .venv
+# python3.12 -m venv .venv
+python3 -m venv .venv
 ```
 
 ### 2. Activar el virtual environment
