@@ -13,7 +13,11 @@ python3 -m venv .venv
 
 **En Windows:**
 ```bash
-venv\Scripts\activate
+# Permitir ejecutar politicas de seguridad desde consola
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# Activar ve
+.\.venv\Scripts\activate
 ```
 
 ### 3. Verificar la activación

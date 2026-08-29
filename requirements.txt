@@ -1,0 +1,11 @@
+# sesion 01
+numpy
+torch # PyTorch
+ipykernel
+torchvision
+matplotlib
+
+# softmax
+scikit-learn
+
+
