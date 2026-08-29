@@ -39,7 +39,7 @@ def predecir(modelo, letra):
     """
     if letra not in modelo:
         return None
-    return random.choice(modelo[letra]) ## funcion probabilidad
+    return random.choice(modelo[letra])
 
 
 def generar(modelo, semilla, cantidad):
@@ -61,27 +61,24 @@ def generar(modelo, semilla, cantidad):
 
 # ---------------- PROGRAMA PRINCIPAL ----------------
 if __name__ == "__main__":
-    # 1) Datos de entrenamiento (cambialo por el texto que quieras)
-    texto = "Hola mundo hola Marta hola Mateo hola mundo cruel".lower()
-    #texto = "Hola mundo".lower()
+    # 1) Datos de entrenamiento: inicio con datos publicos.
+    #    Tambien puedes cargar cualquier archivo asi:
+    texto = open("mi_texto.txt", encoding="utf-8").read().lower()
 
+    # limpieza de datos
+    texto = " ".join(texto.split())   # limpiar saltos de linea y espacios extra
 
     # 2) Entrenar el modelo
     modelo = entrenar(texto)
 
+    for key, value in modelo.items():
+        print(f"Despues de '{key}' puedes continuar con: {value}")
 
-
-    #for key, value in modelo.items():
-    #    print(f"Después de '{key}' puede seguir: {value}")
-
+    #print("Despues de 'h' vio:", modelo["h"])
+    #print("Despues de 'l' vio:", modelo["l"])
 
     # 3) Generar texto nuevo
-    for i in range(5):
-        semilla = "h" #random.choice(list(modelo.keys()))
-        print(f"\n Ite {i} , Semilla: '{semilla}'")
-        salida = generar(modelo, semilla=semilla, cantidad=30)
-        print("Texto generado:", salida)
+    #salida = generar(modelo, semilla="h", cantidad=40)
+    salida = generar(modelo, semilla="e", cantidad=100)
 
-    #salida = generar(modelo, semilla="h", cantidad=30)
-
-    #print("\nTexto generado:", salida)
+    print("\nTexto generado:", salida)
