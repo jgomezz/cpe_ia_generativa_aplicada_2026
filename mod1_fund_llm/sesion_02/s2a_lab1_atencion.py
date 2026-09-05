@@ -29,12 +29,12 @@ import math
 # Embeddings de juguete (la idea del lab 5 de la sesion 1):
 # cada palabra es una lista de numeros. Aqui los escribimos A MANO
 # y con dimensiones legibles, para poder VER lo que pasa.
-#                       animal  comida  accion  articulo
+#              animal  comida  accion  articulo
 EMBEDDINGS = {
-    "el":      [0.0,    0.0,    0.0,    1.0],
-    "gato":    [1.0,    0.0,    0.2,    0.0],
-    "come":    [0.3,    0.6,    1.0,    0.0],
-    "pescado": [0.0,    1.0,    0.0,    0.0],
+    "el":      [0.0,    0.0,    0.0,    1.0],  # x [0.0,    0.0,    0.0,    1.0]
+    "gato":    [1.0,    0.0,    0.2,    0.0],  # x [0.0,    0.0,    0.0,    1.0]
+    "come":    [0.3,    0.6,    1.0,    0.0],  # x [0.0,    0.0,    0.0,    1.0]
+    "pescado": [0.0,    1.0,    0.0,    0.0],  # x [0.0,    0.0,    0.0,    1.0]
 }
 
 def comparar(v1, v2):
