@@ -68,7 +68,7 @@ def generar(modelo, tokens_semilla, cantidad):
         clave = tuple(tokens[-CONTEXTO:])
         siguiente = predecir(modelo, clave)
         if siguiente is None:
-            tokens.append("[me quede mudo: nunca vi este contexto]")
+            tokens.append("[No tengo información en mi contexto sobre esta consulta]")
             break
         tokens.append(siguiente)
     texto = " ".join(tokens)
@@ -80,7 +80,8 @@ if __name__ == "__main__":
     # 1) El corpus de pre-entrenamiento: texto crudo, sin formato de
     #    pregunta/respuesta (pasaje de "Tradiciones Peruanas" de
     #    Ricardo Palma; dominio publico, Project Gutenberg 21282)
-    texto = open("mod1_fund_llm/sesion_01/data/mi_texto.txt", encoding="utf-8").read().lower()
+    #texto = open("mod1_fund_llm/sesion_01/data/mi_texto.txt", encoding="utf-8").read().lower()
+    texto = open("mi_texto.txt", encoding="utf-8").read().lower()
     texto = " ".join(texto.split())
     tokens = tokenizar(texto)
 
