@@ -70,15 +70,23 @@ def decodificar(ids, vocab):
 
 # ---------------- PROGRAMA PRINCIPAL ----------------
 if __name__ == "__main__":
-    texto = "Hola mundo, hola Marta, hola Mateo. Hola mundo cruel!".lower()
+
+    
+    texto = "Hola mundo, hola Marta, hola Mateo. Hola mundo cruel, Hola Jaime!".lower()
+    
 
     # 1) Tokenizar de dos formas distintas
     tokens_char = tokenizar_por_caracteres(texto)
+
+    print("Texto original:", texto)
+
+    print(f"\nTokens por CARACTER ({len(tokens_char)} tokens):")
+    print(tokens_char)
+
+
     tokens_pal = tokenizar_por_palabras(texto)
 
     print("Texto original:", texto)
-    print(f"\nTokens por CARACTER ({len(tokens_char)} tokens):")
-    print(tokens_char)
 
     print(f"\nTokens por PALABRA ({len(tokens_pal)} tokens):")
     print(tokens_pal)
@@ -92,7 +100,7 @@ if __name__ == "__main__":
     print("\nVocabulario por palabra:", vocab_pal)
 
     # 3) Codificar y decodificar una frase con el vocabulario de palabras
-    frase = tokenizar_por_palabras("hola mundo mateo")
+    frase = tokenizar_por_palabras("hola mundo mateo") # Estoy usando palabras del vocabulario de palabras, no de caracteres
     ids = codificar(frase, vocab_pal)
     texto_recuperado = decodificar(ids, vocab_pal)
 
