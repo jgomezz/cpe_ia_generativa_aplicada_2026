@@ -57,7 +57,7 @@ def generar(modelo, tokens_semilla, cantidad):
     for _ in range(cantidad):
         siguiente = predecir(modelo, tuple(tokens[-CONTEXTO:]))
         if siguiente is None:
-            tokens.append("[me quede mudo]")
+            tokens.append("[no tengo la información en mi contexto sobre esta consulta]")
             break
         tokens.append(siguiente)
     return re.sub(r" ([^\w\s])", r"\1", " ".join(tokens))
@@ -72,8 +72,11 @@ def preguntar(modelo, texto_pregunta):
 # ---------------- PROGRAMA PRINCIPAL ----------------
 if __name__ == "__main__":
     # 1) PRE-ENTRENAR el modelo base (igual que el lab 3)
-    texto = open("mod1_fund_llm/sesion_01/data/mi_texto.txt", encoding="utf-8").read().lower()
+    #texto = open("mod1_fund_llm/sesion_01/data/mi_texto.txt", encoding="utf-8").read().lower()
+    texto = open("mi_texto.txt", encoding="utf-8").read().lower()
     tokens_corpus = tokenizar(" ".join(texto.split()))
+
+    # MODELO BASE
     modelo = entrenar(tokens_corpus)
 
     # 2) ANTES del fine-tuning: mudo ante las preguntas
@@ -83,10 +86,11 @@ if __name__ == "__main__":
 
     # 3) FINE-TUNING: seguir contando sobre EL MISMO modelo,
     #    ahora con los 12 dialogos de ejemplo  <- EL PASO NUEVO
-    dialogos = open("mod1_fund_llm/sesion_02/data/dialogos.txt", encoding="utf-8").read().lower()
+    #dialogos = open("mod1_fund_llm/sesion_02/data/dialogos.txt", encoding="utf-8").read().lower()
+    dialogos = open("dialogos.txt", encoding="utf-8").read().lower()
     tokens_dialogos = tokenizar(" ".join(dialogos.split()))
     print(f"\ndatos de ajuste: {len(tokens_dialogos)} palabras de dialogos\n")
-
+    # MODELO CON FINE-TUNING
     modelo = entrenar(tokens_dialogos, modelo=modelo)
 
     # 4) DESPUES: las mismas preguntas

@@ -81,7 +81,7 @@ if __name__ == "__main__":
     #    pregunta/respuesta (pasaje de "Tradiciones Peruanas" de
     #    Ricardo Palma; dominio publico, Project Gutenberg 21282)
     #texto = open("mod1_fund_llm/sesion_01/data/mi_texto.txt", encoding="utf-8").read().lower()
-    texto = open("mi_texto.txt", encoding="utf-8").read().lower()
+    texto = open("caballero_Carmelo.txt", encoding="utf-8").read().lower()
     texto = " ".join(texto.split())
     tokens = tokenizar(texto)
 
