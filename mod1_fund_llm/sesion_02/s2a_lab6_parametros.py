@@ -74,10 +74,10 @@ def aplicar_top_p(probabilidades, p_objetivo):
     elegidas = {}
     acumulado = 0.0
     for palabra, prob in probabilidades.items():
-        elegidas[palabra] = prob
         acumulado += prob
         if acumulado >= p_objetivo:
             break
+        elegidas[palabra] = prob
     suma = sum(elegidas.values())
     return {p: v / suma for p, v in elegidas.items()}
 
@@ -104,7 +104,7 @@ def generar(modelo, semilla, cantidad, temperatura=1.0, top_k=None, top_p=None):
     return re.sub(r" ([^\w\s])", r"\1", " ".join(tokens))
 
 
-def imprimir_tabla(titulo, probabilidades, limite=5):
+def imprimir_tabla(titulo, probabilidades, limite=6):
     pares = list(probabilidades.items())[:limite]
     fila = "  ".join(f"{p}: {v:.2f}" for p, v in pares)
     extra = f"  (+{len(probabilidades) - limite} mas)" if len(probabilidades) > limite else ""
@@ -113,7 +113,8 @@ def imprimir_tabla(titulo, probabilidades, limite=5):
 
 # ---------------- PROGRAMA PRINCIPAL ----------------
 if __name__ == "__main__":
-    texto = open("mod1_fund_llm/sesion_01/data/mi_texto.txt", encoding="utf-8").read().lower()
+    #texto = open("mod1_fund_llm/sesion_01/data/mi_texto.txt", encoding="utf-8").read().lower()
+    texto = open("mi_texto.txt", encoding="utf-8").read().lower()
     modelo = entrenar(tokenizar(" ".join(texto.split())))
 
     # 1) Las opciones REALES del modelo despues de la palabra "de"
@@ -124,7 +125,7 @@ if __name__ == "__main__":
 
     # 2) TEMPERATURE reparte ese sorteo
     print("\n1) TEMPERATURE (probabilidades despues de 'de'):")
-    for t in [0.5, 1.0, 2.0]:
+    for t in [0.1, 0.5, 1.0, 2.0]:
         imprimir_tabla(f"T={t}", aplicar_temperatura(conteos, t))
     print("   T baja -> el favorito arrasa. T alta -> sorteo parejo.")
 
