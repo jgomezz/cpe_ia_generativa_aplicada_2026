@@ -83,13 +83,7 @@ def enviar_peticion_post(url, cabeceras, cuerpo):
 
 
 #def preguntar_gemini(pregunta, modelo="gemma-4-31b-it"):
-#def preguntar_gemini(pregunta, modelo="gemma-4-26b-a4b-it"):
-#def preguntar_gemini(pregunta, modelo="gemini-3.1-flash-lite"):
-#def preguntar_gemini(pregunta, modelo="gemini-3.5-flash"):
-#def preguntar_gemini(pregunta, modelo="gemini-3.6-flash"):
-#def preguntar_gemini(pregunta, modelo="gemini-3.7-flash"):
-
-def preguntar_gemini(pregunta, modelo="gemini-3.5-flash-lite"):
+def preguntar_gemini(pregunta, modelo="gemma-4-26b-a4b-it"):
     """Le hace una pregunta a Gemini (Google) y devuelve el texto de la
     respuesta, los tokens de entrada y los tokens de salida.
 
