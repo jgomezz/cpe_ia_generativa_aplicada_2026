@@ -87,11 +87,19 @@ def recompensa(tokens_respuesta):
 if __name__ == "__main__":
     random.seed(0)   # para que la corrida sea repetible
 
-    # 1) Modelo base + fine-tuning (labs 3 y 4, en tres lineas)
-    corpus = open("mod1_fund_llm/sesion_01/data/mi_texto.txt", encoding="utf-8").read().lower()
-    dialogos = open("mod1_fund_llm/sesion_02/data/dialogos.txt", encoding="utf-8").read().lower()
-    modelo = entrenar(tokenizar(" ".join(corpus.split())))
-    modelo = entrenar(tokenizar(" ".join(dialogos.split())), modelo=modelo)
+    # 1) Modelo base
+    
+    #corpus = open("mod1_fund_llm/sesion_01/data/mi_texto.txt", encoding="utf-8").read().lower()
+    corpus = open("mi_texto.txt", encoding="utf-8").read().lower()
+    modelo_base = entrenar(tokenizar(" ".join(corpus.split())))
+
+
+    # 2) Fine-tuning
+    #dialogos = open("mod1_fund_llm/sesion_02/data/dialogos.txt", encoding="utf-8").read().lower()
+    dialogos = open("dialogos.txt", encoding="utf-8").read().lower()
+    modelo_ft= entrenar(tokenizar(" ".join(dialogos.split())), modelo=modelo_base)
+
+    # 3) El ciclo del RLHF
 
     preguntas = [
         "donde esta la casa del almirante?",
@@ -104,7 +112,6 @@ if __name__ == "__main__":
     CANDIDATAS = 10   # respuestas que genera por pregunta
     LARGO = 14        # tokens por respuesta
 
-    # 2) El ciclo del RLHF
     for ronda in range(6):
         premiadas = []
         total = 0.0
@@ -112,7 +119,7 @@ if __name__ == "__main__":
 
         for prompt in prompts:
             for _ in range(CANDIDATAS):
-                respuesta = continuar(modelo, prompt, LARGO)
+                respuesta = continuar(modelo_ft, prompt, LARGO)
                 puntos = recompensa(respuesta)
                 total += puntos
                 cuenta += 1
@@ -126,13 +133,13 @@ if __name__ == "__main__":
         # 3) REFORZAR: contar las premiadas otra vez (dos veces,
         #    para que pesen). Lo preferido se vuelve mas probable.
         for premiada in premiadas:
-            modelo = entrenar(premiada, modelo=modelo)
-            modelo = entrenar(premiada, modelo=modelo)
+            modelo_tmp = entrenar(premiada, modelo=modelo_ft)
+            modelo_ft = entrenar(premiada, modelo=modelo_tmp)
 
     # 4) Resultado: las mismas preguntas con el modelo reforzado
     print("\n--- Respuestas despues del RLHF ---")
     for pregunta, prompt in zip(preguntas[:3], prompts[:3]):
-        respuesta = " ".join(continuar(modelo, prompt, 12))
+        respuesta = " ".join(continuar(modelo_ft, prompt, 12))
         respuesta = re.sub(r" ([^\w\s])", r"\1", respuesta)
         print(f"{pregunta} -> {respuesta}")
 
