@@ -11,3 +11,7 @@ scikit-learn
 # sesion 03
 python-dotenv
 ollama
+
+
+# sesion 04
+google-genai
