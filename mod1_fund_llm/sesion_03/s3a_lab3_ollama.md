@@ -8,3 +8,6 @@ ollama list
 
 ## Bajar un modelo
 ollama pull qwen3:0.6b
+
+## Ejecutar un modelo
+ollama run qwen3:0.6b
