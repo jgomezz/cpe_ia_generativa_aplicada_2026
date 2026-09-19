@@ -7,7 +7,10 @@ MODELO = "qwen3:0.6b"
 respuesta = ollama.chat(
     model=MODELO,
     messages=[
-        {"role": "user", "content": "Cual es la capital de Perú?"}
+        {
+            "role": "user", 
+            "content": "¿Cuál es la capital de Perú?"
+        }
     ],
 )
 
