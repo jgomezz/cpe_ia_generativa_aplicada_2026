@@ -1,3 +1,4 @@
+# Importacion de libreria
 import ollama
 
 # 1) El modelo. Es el nombre exacto que sale con "ollama list".
