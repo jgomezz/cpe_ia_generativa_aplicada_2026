@@ -10,3 +10,4 @@ scikit-learn
 
 # sesion 03
 python-dotenv
+ollama
