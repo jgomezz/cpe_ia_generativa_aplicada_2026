@@ -7,7 +7,8 @@ from google import genai #
 from google.genai import types
 
 # El modelo y la foto que le vamos a comprender.
-MODELO = "gemini-3.7-flash"
+#MODELO = "gemini-3.7-flash"
+MODELO = "gemini-3.5-flash-lite"
 IMAGEN = "mod1_fund_llm/sesion_04/imagenes/title.png"
 
 # Carga la clave de la API desde el archivo .env
