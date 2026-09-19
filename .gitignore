@@ -1,5 +1,7 @@
 .venv
 .DS_Store
 
+generadas/ 
+
 # Proteger archivos de claves
 .env
