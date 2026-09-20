@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from gradio_client import Client 
 
 ESPACIO = "jgomezz/generate-image"     # el nombre de SU Space
-PROMPT = "Un dia caluroso de verano en la playa"
+PROMPT = "Una dia de nieve en los andes de Perú"
 DESTINO = "mod1_fund_llm/sesion_04/generadas/playa.png"
 
 # Carga la clave de la API desde el archivo .env
