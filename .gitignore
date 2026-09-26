@@ -5,3 +5,6 @@ generadas/
 
 # Proteger archivos de claves
 .env
+
+#
+__pycache__

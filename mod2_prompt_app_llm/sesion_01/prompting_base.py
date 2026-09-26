@@ -4,8 +4,8 @@ import ollama
 MODELO = "qwen3.5:9b"
 
 # URL donde esta corriendo el servidor de Ollama. Por defecto es "http://localhost:11434"
-URL = "http://localhost:11434"
-# URL = "https://canning-rerun-snowboard.ngrok-free.dev"
+#URL = "http://localhost:11434"
+URL = "https://canning-rerun-snowboard.ngrok-free.dev"
 
 
 CLIENTE = ollama.Client(host=URL)
