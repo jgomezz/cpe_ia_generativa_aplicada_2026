@@ -74,7 +74,9 @@ conocerlas: es el escenario donde los ejemplos deberían marcar la diferencia.
 ```
 Clasifica el mensaje en UNA categoría: FACT (facturación), LOG (logística), PLAN (cambio de plan), TEC (falla técnica).
 
-Mensaje: "Quiero pasar al plan anual"
+Mensaje: 
+"""Quiero pasar al plan anual"""
+
 Responde solo con la categoría.
 ```
 
@@ -90,6 +92,8 @@ Mensaje: "El courier no pasó por mi casa"           -> LOG
 Mensaje: "Quiero cambiar a un plan con más datos"   -> PLAN
 Mensaje: "La aplicación no abre desde ayer"         -> TEC
 
-Mensaje: "Quiero pasar al plan anual"
+Mensaje: 
+"""Quiero pasar al plan anual"""
+
 Responde solo con la categoría.
 ```
