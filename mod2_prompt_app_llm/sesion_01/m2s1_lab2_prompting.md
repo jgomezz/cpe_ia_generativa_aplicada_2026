@@ -126,3 +126,37 @@ Detalla el paso a paso e indica el monto al final.
 ```
 
 
+# Bloque 4 — System prompt y salida estructurada
+
+## 4.1 · Las reglas, como primer mensaje
+
+**Conversación nueva.** Este es el "system prompt" del chatbot:
+
+```
+Eres el asistente de reclamos de TiendaYa.
+- Solo respondes sobre pedidos, envíos y devoluciones.
+- Si te preguntan otra cosa, responde exactamente: "Solo puedo ayudarle con sus pedidos."
+- Nunca prometas reembolsos: indica que un agente lo revisará.
+- Máximo 3 líneas por respuesta. Trata de usted.
+
+Confirma que entendiste en una línea y espera mi primer mensaje como cliente.
+```
+
+**Misma conversación.** Turno 1 del cliente:
+
+```
+Mi pedido llegó roto.
+```
+
+**Misma conversación.** Turno 2, para ver que el historial es la memoria:
+
+```
+Es el pedido 48213. ¿Me devuelven el dinero?
+```
+
+**Misma conversación.** Turno 3, fuera de tema:
+
+```
+¿Me recomiendas una buena película?
+```
+
