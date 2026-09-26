@@ -97,3 +97,30 @@ Mensaje:
 
 Responde solo con la categoría.
 ```
+---
+
+# Bloque 3 — Chain of Thought
+
+## 3.1 · Respuesta directa
+
+**Conversación nueva.**
+
+```
+Un cliente de TiendaYa compró 3 polos a S/ 45 cada uno y 2 pantalones a S/ 89 cada uno.
+Devolvió 1 polo y 1 pantalón. El envío (S/ 15) no es reembolsable.
+¿Cuánto se le reembolsa?
+
+Responde solo con el monto.
+```
+
+## 3.2 · Detalle paso a paso
+
+**Conversación nueva.**
+
+```
+Un cliente de TiendaYa compró 3 polos a S/ 45 cada uno y 2 pantalones a S/ 89 cada uno.
+Devolvió 1 polo y 1 pantalón. El envío (S/ 15) no es reembolsable.
+¿Cuánto se le reembolsa?
+
+Detalla el paso a paso e indica el monto al final.
+```
