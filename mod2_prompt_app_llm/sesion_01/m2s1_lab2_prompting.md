@@ -88,7 +88,7 @@ Clasifica el mensaje en UNA categoría: FACT (facturación), LOG (logística), P
 Mensaje: "Me facturaron un producto que no compré"  -> FACT
 Mensaje: "El courier no pasó por mi casa"           -> LOG
 Mensaje: "Quiero cambiar a un plan con más datos"   -> PLAN
-Mensaje: "La app no abre desde ayer"                -> TEC
+Mensaje: "La aplicación no abre desde ayer"         -> TEC
 
 Mensaje: "Quiero pasar al plan anual"
 Responde solo con la categoría.
