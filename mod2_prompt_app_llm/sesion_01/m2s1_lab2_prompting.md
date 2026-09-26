@@ -160,3 +160,14 @@ Es el pedido 48213. ¿Me devuelven el dinero?
 ¿Me recomiendas una buena película?
 ```
 
+## 4.2 · Pedir JSON
+
+**Conversación nueva.**
+
+```
+Extrae los datos del mensaje.
+Mensaje: """Soy Rosa Quispe, pedido 48213. Pagué S/ 320 el 14 de agosto y llegó roto."""
+
+Responde ÚNICAMENTE con este JSON, sin texto adicional:
+{"cliente": string, "pedido": string, "monto": number, "fecha_pago": "YYYY-MM-DD"}
+```
