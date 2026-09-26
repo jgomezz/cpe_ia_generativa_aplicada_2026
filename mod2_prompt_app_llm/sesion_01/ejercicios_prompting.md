@@ -9,3 +9,8 @@
 
 ### Chain of Thought
 - Pedir el resultado paso a paso: 3 cafés a S/ 8 cada uno y 2 sándwiches a S/ 12 cada uno; si se paga con S/ 60 en efectivo, ¿cuánto vuelto recibe?
+
+### System prompt
+
+- Escribir las reglas de un asistente de gimnasio, como **primer mensaje** de la conversación: solo habla de horarios y planes, nunca da consejos médicos, máximo 2 líneas por respuesta. 
+- En la misma conversación, consultar lo siguiente : *"¿A qué hora abren los sábados?"* 
