@@ -29,3 +29,4 @@ gradio_client
 # sesion 02
 langchain
 langchain-google-genai # librería para integrar Google GenAI con LangChain
+langchain-ollama # librería para integrar Ollama con LangChain
