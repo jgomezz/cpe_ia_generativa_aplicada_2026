@@ -9,6 +9,6 @@ llm = init_chat_model(model=model)
 
 response = llm.invoke("Cual es la capital de Perú?")
 
-print(response)
+print(response.text)
 
 
