@@ -28,4 +28,4 @@ gradio_client
 
 # sesion 02
 langchain
-langchain-google-genai
+langchain-google-genai # librería para integrar Google GenAI con LangChain

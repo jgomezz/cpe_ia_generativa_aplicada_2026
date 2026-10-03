@@ -1,3 +1,7 @@
+import logging
+logging.getLogger("google_genai.models").setLevel(logging.ERROR)
+
+
 from langchain.chat_models import init_chat_model
 from dotenv import load_dotenv
 
