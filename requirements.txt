@@ -28,3 +28,4 @@ gradio_client
 
 # sesion 02
 langchain
+langchain-google-genai
