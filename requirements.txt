@@ -1,3 +1,7 @@
+########################
+# Modulo 1
+########################
+
 # sesion 01
 numpy
 torch # PyTorch
@@ -12,7 +16,15 @@ scikit-learn
 python-dotenv
 ollama
 
-
 # sesion 04
 google-genai
 gradio_client
+
+########################
+# Modulo 2
+########################
+
+# sesion 01
+
+# sesion 02
+langchain
