@@ -153,3 +153,6 @@ print("Similitudes ordenadas de mayor a menor: ", similitudes[:5])  # Muestra la
 
 for sim, i in similitudes[:3]:
     print(f"Fragmento {i+1}: Similitud = {sim:.4f}  pagina = {fragmentos[i].metadata['pagina']}  contenido = {fragmentos[i].page_content[:100]}...") 
+
+
+from langchain_chroma import Chroma
