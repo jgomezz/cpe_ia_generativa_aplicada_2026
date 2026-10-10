@@ -136,3 +136,20 @@ vector_fragmentos = [ fragmento.page_content for fragmento in fragmentos]
 vector_fragmentos_embeddings = embeddings.embed_documents(vector_fragmentos)
 
 print("Vector de embeddings de los fragmentos: ", vector_fragmentos_embeddings[:20], "...")  # Muestra los primeros 200 valores del vector
+
+
+
+# Buscando similitudes entre el vector de la pregunta y los vectores de los fragmentos
+similitudes = []
+
+for i, fragmento in enumerate(vector_fragmentos_embeddings):
+    similitud = similitud_coseno(vector_pregunta, fragmento)
+    similitudes.append((similitud, i))
+    #print(f"Fragmento {i+1}: Similitud = {similitud:.4f}")  
+
+similitudes.sort(reverse=True)
+
+print("Similitudes ordenadas de mayor a menor: ", similitudes[:5])  # Muestra las 5 similitudes más altas
+
+for sim, i in similitudes[:3]:
+    print(f"Fragmento {i+1}: Similitud = {sim:.4f}  pagina = {fragmentos[i].metadata['pagina']}  contenido = {fragmentos[i].page_content[:100]}...") 
