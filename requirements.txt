@@ -30,3 +30,7 @@ gradio_client
 langchain
 langchain-google-genai # librería para integrar Google GenAI con LangChain
 langchain-ollama # librería para integrar Ollama con LangChain
+
+
+# sesion 03
+pypdf
