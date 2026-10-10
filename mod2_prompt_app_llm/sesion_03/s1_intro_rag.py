@@ -69,3 +69,25 @@ for i, pagina in enumerate(reader.pages):
     documentos.append(doc)
 
 print("Número de páginas procesadas: ", len(documentos))
+
+
+# Segmentacion de documentos
+
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+# Se va a segmentar el documento en fragmetos con solapamientos
+
+# Dividir el fragmentos de 500 carateres con un solapamiento de 50 caracteres
+
+chunk_size = 500
+chunk_overlap = 50
+
+spliter = RecursiveCharacterTextSplitter(
+    chunk_size=chunk_size,  # fragmento de 500 caracteres
+    chunk_overlap=chunk_overlap # solapamiento de 50 caracteres
+)
+
+fragmentos = spliter.split_documents(documentos)
+
+print(f"{'chunk_size':>10} {'overlap':>8} {'fragmentos':>11}")
+print(f"{chunk_size:>10} {chunk_overlap:>8} {len(fragmentos):>11}")
