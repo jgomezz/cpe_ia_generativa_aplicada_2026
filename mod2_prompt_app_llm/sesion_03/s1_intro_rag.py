@@ -35,3 +35,12 @@ prefix_model = os.getenv("PREFIX_MODEL")
 
 # Obtención del modelo
 llm = get_llm(prefix_model)
+
+
+# Consulta sin tener la informacion de la politica de devolucion de la empresa TiendaYa
+
+PREGUNTA = "¿Cuál es la política de devolución de la empresa TiendaYa para productos en oferta?"
+
+respuesta = llm.invoke(PREGUNTA)
+
+print("Respuesta: " + respuesta.text)
