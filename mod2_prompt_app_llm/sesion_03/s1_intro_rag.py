@@ -156,3 +156,33 @@ for sim, i in similitudes[:3]:
 
 
 from langchain_chroma import Chroma
+
+
+
+
+# Persistencia de la base de datos de fragmentos en Chroma
+base_datos = Chroma.from_documents(
+    documents=fragmentos,
+    embedding=embeddings,
+    persist_directory="data/tiendaYa_db",
+    collection_name="tiendaYa_collection",
+    collection_metadata={"hnsw:space": "cosine"},
+)
+
+print(f"Fragmentos indexados: {base_datos._collection.count()}")
+
+# Realizando una consulta a la base de datos de fragmentos en Chroma
+
+resultado = base_datos.similarity_search(PREGUNTA, k=3)
+
+for i, doc in enumerate(resultado):
+    print(f"Resultado {i+1}: pagina = {doc.metadata['pagina']}  contenido = {doc.page_content[50]}...")
+
+
+    # Realizando una consulta a la base de datos de fragmentos en Chroma
+
+resultado = base_datos.similarity_search_with_score(PREGUNTA, k=3)
+
+for i, (doc, score) in enumerate(resultado):
+    print(f"Resultado {i+1}: pagina = {doc.metadata['pagina']}  contenido = {doc.page_content[50]}...  score = {score:.4f}")
+
