@@ -135,7 +135,7 @@ vector_fragmentos = [ fragmento.page_content for fragmento in fragmentos]
 
 vector_fragmentos_embeddings = embeddings.embed_documents(vector_fragmentos)
 
-print("Vector de embeddings de los fragmentos: ", vector_fragmentos_embeddings[:20], "...")  # Muestra los primeros 200 valores del vector
+# print("Vector de embeddings de los fragmentos: ", vector_fragmentos_embeddings[:20], "...")  # Muestra los primeros 200 valores del vector
 
 
 
