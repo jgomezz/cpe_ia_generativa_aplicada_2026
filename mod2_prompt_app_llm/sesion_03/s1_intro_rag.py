@@ -108,3 +108,17 @@ def similitud_coseno(v1, v2):
     if norma1 == 0 or norma2 == 0:
         return 0.0
     return producto_punto / (norma1 * norma2)
+
+
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
+MODEL_EMBEDDINGS = "gemini-embedding-001"  # Modelo de embeddings de Google GenAI
+
+embeddings = GoogleGenerativeAIEmbeddings(model=MODEL_EMBEDDINGS)  # Modelo de embeddings de Google GenAI
+
+PREGUNTA = "¿Cuál es la política de devolución de la empresa TiendaYa para productos en oferta?"
+
+# Generar el vector de la pregunta
+vector_pregunta = embeddings.embed_query(PREGUNTA)
+
+print("Vector de la pregunta: ", vector_pregunta[:200], "...")  # Muestra los primeros 200 valores del vector
