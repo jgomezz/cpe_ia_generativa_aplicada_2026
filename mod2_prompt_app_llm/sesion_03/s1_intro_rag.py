@@ -157,8 +157,10 @@ for sim, i in similitudes[:3]:
 
 from langchain_chroma import Chroma
 
-
-
+# Borrar base de datos vectorial
+Chroma( collection_name="tiendaYa_collection", 
+        persist_directory="data/tiendaYa_db",
+        embedding_function=embeddings).delete_collection()
 
 # Persistencia de la base de datos de fragmentos en Chroma
 base_datos = Chroma.from_documents(
@@ -168,6 +170,7 @@ base_datos = Chroma.from_documents(
     collection_name="tiendaYa_collection",
     collection_metadata={"hnsw:space": "cosine"},
 )
+
 
 print(f"Fragmentos indexados: {base_datos._collection.count()}")
 
@@ -186,3 +189,46 @@ resultado = base_datos.similarity_search_with_score(PREGUNTA, k=3)
 for i, (doc, score) in enumerate(resultado):
     print(f"Resultado {i+1}: pagina = {doc.metadata['pagina']}  contenido = {doc.page_content[50]}...  score = {score:.4f}")
 
+from langchain_core.prompts import ChatPromptTemplate
+
+PREGUNTA = "¿Cuál es la política de devolución de la empresa TiendaYa para productos en oferta?"
+
+# 1. Base de datos vectorial 
+retriever = base_datos.as_retriever(search_kwargs={"k": 3})
+
+# 2. Prompt
+prompt_rag = ChatPromptTemplate.from_template(
+    """ 
+    Eres el asistente de TiendaYa. Responde solo con el contexto; si no tiene la información, 
+    indica que el documento no lo especifica. Cita la página entre paréntesis.
+    
+    Contexto:
+           {contexto}
+           
+    Pregunta: 
+           {pregunta}
+
+    """
+)
+
+# 3. Buscar coincidencias en la base de datos vectorial
+fragmentos = retriever.invoke(PREGUNTA)
+
+contexto = ""
+for f in fragmentos:
+    contexto += f"[página {f.metadata['pagina']}] {f.page_content}\n\n"
+
+# print(contexto)
+
+# 4. Preparar el prompt final
+
+prompt = prompt_rag.invoke({"contexto": contexto, 
+                            "pregunta": PREGUNTA})
+
+# print(prompt)
+
+# 5. Usar el LLM
+
+response = llm.invoke(prompt)
+
+print(response.content)
