@@ -41,15 +41,31 @@ llm = get_llm(prefix_model)
 
 PREGUNTA = "¿Cuál es la política de devolución de la empresa TiendaYa para productos en oferta?"
 
+'''
 respuesta = llm.invoke(PREGUNTA)
 
 print("Respuesta: " + respuesta.text)
-
+'''
 
 # Librería pypdf
 
 from pypdf import PdfReader
+from langchain_core.documents import Document
+
 
 ARCHIVO = "mod2_prompt_app_llm/sesion_03/data/politica_tiendaya.pdf"
 
 reader = PdfReader(ARCHIVO)
+documentos = []
+
+for i, pagina in enumerate(reader.pages):
+    
+    texto = pagina.extract_text()
+    print(f"Página {i+1}: {texto[:100]}...")  # Muestra los primeros 100 caracteres de cada página
+
+    doc = Document(page_content=texto, 
+                   metadata={"pagina": i+1})
+    
+    documentos.append(doc)
+
+print("Número de páginas procesadas: ", len(documentos))

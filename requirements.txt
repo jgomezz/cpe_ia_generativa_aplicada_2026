@@ -34,3 +34,4 @@ langchain-ollama # librería para integrar Ollama con LangChain
 
 # sesion 03
 pypdf
+langchain-text-splitters
