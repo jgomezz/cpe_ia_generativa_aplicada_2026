@@ -44,3 +44,12 @@ PREGUNTA = "¿Cuál es la política de devolución de la empresa TiendaYa para p
 respuesta = llm.invoke(PREGUNTA)
 
 print("Respuesta: " + respuesta.text)
+
+
+# Librería pypdf
+
+from pypdf import PdfReader
+
+ARCHIVO = "mod2_prompt_app_llm/sesion_03/data/politica_tiendaya.pdf"
+
+reader = PdfReader(ARCHIVO)
