@@ -121,4 +121,18 @@ PREGUNTA = "¿Cuál es la política de devolución de la empresa TiendaYa para p
 # Generar el vector de la pregunta
 vector_pregunta = embeddings.embed_query(PREGUNTA)
 
-print("Vector de la pregunta: ", vector_pregunta[:200], "...")  # Muestra los primeros 200 valores del vector
+print("Vector de la pregunta: ", vector_pregunta[:20], "...")  # Muestra los primeros 200 valores del vector
+
+
+'''
+for fragmento in fragmentos:
+    print(fragmento.page_content[20], "...")  # Muestra los primeros 100 caracteres del fragmento
+'''
+
+vector_fragmentos = [ fragmento.page_content for fragmento in fragmentos]
+
+#print(vector_fragmentos[:5])  # Muestra los primeros 5 fragmentos
+
+vector_fragmentos_embeddings = embeddings.embed_documents(vector_fragmentos)
+
+print("Vector de embeddings de los fragmentos: ", vector_fragmentos_embeddings[:20], "...")  # Muestra los primeros 200 valores del vector
