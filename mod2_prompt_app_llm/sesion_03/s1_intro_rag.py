@@ -91,3 +91,20 @@ fragmentos = spliter.split_documents(documentos)
 
 print(f"{'chunk_size':>10} {'overlap':>8} {'fragmentos':>11}")
 print(f"{chunk_size:>10} {chunk_overlap:>8} {len(fragmentos):>11}")
+
+
+import math 
+
+def similitud_coseno(v1, v2):
+    """
+    SIMILITUD COSENO = mide el angulo entre dos vectores.
+    1.0  -> apuntan exactamente igual (muy parecidos)
+    0.0  -> no tienen relacion
+    Es la metrica que usan los LLMs reales para comparar embeddings.
+    """
+    producto_punto = sum(a * b for a, b in zip(v1, v2))
+    norma1 = math.sqrt(sum(a * a for a in v1))
+    norma2 = math.sqrt(sum(b * b for b in v2))
+    if norma1 == 0 or norma2 == 0:
+        return 0.0
+    return producto_punto / (norma1 * norma2)
