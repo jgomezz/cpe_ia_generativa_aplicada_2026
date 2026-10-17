@@ -36,3 +36,7 @@ langchain-ollama # librería para integrar Ollama con LangChain
 pypdf
 langchain-text-splitters
 langchain-chroma   
+
+# sesion 04
+langchain-qdrant
+qdrant-client
