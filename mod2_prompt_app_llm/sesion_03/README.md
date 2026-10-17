@@ -26,3 +26,4 @@ services:
 ```bash
 docker compose up -d
 ```
+### 4. Ingresar al enlace http://localhost:6333/dashboard#/welcome
