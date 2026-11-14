@@ -40,3 +40,10 @@ langchain-chroma
 # sesion 04
 langchain-qdrant
 qdrant-client
+
+########################
+# Modulo 3
+########################
+
+## sesion 02
+langchain-mcp-adapters
