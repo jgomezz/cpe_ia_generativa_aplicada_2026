@@ -13,12 +13,13 @@ import uvicorn
 
 from pydantic import BaseModel, Field
 from s4_lab4_datos import PEDIDOS
-
+from s4_lab4_agente import crear_agente
 
 # ==========================
 # 1. CONFIGURACION
 # ==========================
 app = FastAPI(title="Introducción a Pydantic")
+agent = crear_agente()
 
 # ==========================
 # 2. REGLAS DE ENTRADA Y SALIDA
@@ -30,6 +31,12 @@ class ConsultaPedido(BaseModel):
 class PedidoRespuesta(BaseModel):
     numero: str
     estado: str
+
+class Pregunta(BaseModel):
+    mensaje: str
+
+class Respuesta(BaseModel):
+    respuesta: str
 
 
 # ==========================
@@ -52,6 +59,20 @@ def consultar_pedido(consulta: ConsultaPedido):
         Consulta el estado de un pedido a partir de su número.
     """
     return obtener_pedido(consulta.numero)
+
+
+@app.post("/chat", response_model=Respuesta)
+async def chat(pregunta: Pregunta):
+    """
+        Envía una pregunta al agente y recibe una respuesta.
+    """
+    try:
+        resultado = await agent.ainvoke({"messages":[{"role": "user", "content": pregunta.mensaje}]})
+    except Exception as e:
+        print(f"Error al interactuar con el agente: {e}") 
+        raise HTTPException(status_code=500, detail="Error al interactuar con el agente")
+
+    return Respuesta(respuesta=resultado["messages"][-1].text)
 
 
 # ==========================
