@@ -8,18 +8,24 @@ Probar con el navegador web :
 
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Header
 import uvicorn
 
 from pydantic import BaseModel, Field
 from s4_lab4_datos import PEDIDOS
 from s4_lab4_agente import crear_agente
 
+import os
+from dotenv import load_dotenv
+
 # ==========================
 # 1. CONFIGURACION
 # ==========================
 app = FastAPI(title="Introducción a Pydantic")
 agent = crear_agente()
+
+load_dotenv()
+AGENTE_API_KEY = os.getenv("AGENTE_API_KEY")  # Asegúrate de tener
 
 # ==========================
 # 2. REGLAS DE ENTRADA Y SALIDA
@@ -62,10 +68,13 @@ def consultar_pedido(consulta: ConsultaPedido):
 
 
 @app.post("/chat", response_model=Respuesta)
-async def chat(pregunta: Pregunta):
+async def chat(pregunta: Pregunta, x_api_key: str = Header(default="")):
     """
         Envía una pregunta al agente y recibe una respuesta.
     """
+    if x_api_key != AGENTE_API_KEY:
+        raise HTTPException(status_code=401, detail="Clave API inválida")
+
     try:
         resultado = await agent.ainvoke({"messages":[{"role": "user", "content": pregunta.mensaje}]})
     except Exception as e:
