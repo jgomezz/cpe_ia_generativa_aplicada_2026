@@ -51,3 +51,4 @@ langchain-mcp-adapters
 
 ## sesion 04
 fastapi
+#uvicorn
