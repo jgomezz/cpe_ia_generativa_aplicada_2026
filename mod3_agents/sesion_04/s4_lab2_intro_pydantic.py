@@ -38,13 +38,18 @@ def consultar_pedido(consulta: ConsultaPedido):
     # Simular una respuesta de pedido
     return PedidoRespuesta(numero=consulta.numero, estado="En proceso")  
 
-
 # ==========================
 #  3. EJECUCION
 # ==========================
 if __name__ == "__main__":
-    
+
+
     uvicorn.run(app, host="127.0.0.1", port=8040)
 
-
+    '''
+    # Para reconocer en calientes los cambios en el codigo 
+    # El primer argumento debe incluir el nombre del archivo y el objeto app, separados por dos puntos
+    # El parámetro reload=True permite que el servidor se reinicie automáticamente al detectar cambios en el código
+    uvicorn.run("s4_lab2_intro_pydantic:app", host="127.0.0.1", port=8040, reload=True)
+    '''
 
