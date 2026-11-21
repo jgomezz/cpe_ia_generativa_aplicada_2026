@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asistente de TiendaYa</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 640px; margin: 24px auto; padding: 0 16px; background: #f5f7fa; color: #222; }
+  h1 { font-size: 22px; }
+  #chat { background: #fff; border: 1px solid #d0d7e2; border-radius: 8px; padding: 12px; height: 380px; overflow-y: auto; }
+  .msg { margin: 8px 0; padding: 8px 12px; border-radius: 8px; max-width: 85%; line-height: 1.4; }
+  .cliente { background: #dbe9f8; margin-left: auto; }
+  .agente { background: #eef1f4; }
+  form { display: flex; gap: 8px; margin-top: 12px; }
+  input { flex: 1; padding: 10px; border: 1px solid #c0c8d4; border-radius: 6px; font-size: 15px; }
+  button { padding: 10px 18px; border: 0; border-radius: 6px; background: #1a73b8; color: #fff; font-size: 15px; cursor: pointer; }
+  button:disabled { background: #8aa9c4; }
+  small { color: #667; }
+</style>
+</head>
+<body>
+  <h1>Asistente de TiendaYa</h1>
+  <small id="sesion"></small>
+  <div id="chat"></div>
+  <form id="formulario">
+    <input id="mensaje" placeholder="Escriba su consulta, por ejemplo: ¿Dónde está mi pedido 48213?" autocomplete="off" required>
+    <button id="enviar">Enviar</button>
+  </form>
+
+<script>
+  // Cada pestaña del navegador es una sesión distinta
+  const sessionId = "web-" + Date.now();
+  document.getElementById("sesion").textContent = "Sesión: " + sessionId;
+
+  function agregar(texto, clase) {
+    const div = document.createElement("div");
+    div.className = "msg " + clase;
+    div.textContent = texto;
+    const chat = document.getElementById("chat");
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  document.getElementById("formulario").addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+    const campo = document.getElementById("mensaje");
+    const boton = document.getElementById("enviar");
+    const mensaje = campo.value.trim();
+    if (!mensaje) return;
+    agregar(mensaje, "cliente");
+    campo.value = "";
+    boton.disabled = true;
+    try {
+      // Llamada a la API: POST /chat con un JSON
+      const r = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ session_id: sessionId, mensaje: mensaje })
+      });
+      const datos = await r.json();
+      agregar(r.ok ? datos.respuesta : "Error: " + datos.detail, "agente");
+    } catch (error) {
+      agregar("No se pudo conectar con la API.", "agente");
+    }
+    boton.disabled = false;
+    campo.focus();
+  });
+</script>
+</body>
+</html>

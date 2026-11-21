@@ -8,6 +8,9 @@ Probar con el navegador web :
 
 """
 
+from anyio import Path
+from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse
 from fastapi import FastAPI, HTTPException, Header
 import uvicorn
 
@@ -72,8 +75,8 @@ async def chat(pregunta: Pregunta, x_api_key: str = Header(default="")):
     """
         Envía una pregunta al agente y recibe una respuesta.
     """
-    if x_api_key != AGENTE_API_KEY:
-        raise HTTPException(status_code=401, detail="Clave API inválida")
+    #if x_api_key != AGENTE_API_KEY:
+    #    raise HTTPException(status_code=401, detail="Clave API inválida")
 
     try:
         resultado = await agent.ainvoke({"messages":[{"role": "user", "content": pregunta.mensaje}]})
@@ -83,6 +86,10 @@ async def chat(pregunta: Pregunta, x_api_key: str = Header(default="")):
 
     return Respuesta(respuesta=resultado["messages"][-1].text)
 
+@app.get("/")
+def pagina_chat():
+    """Entrega la página web del chat."""
+    return FileResponse(Path(__file__).parent / "s4_lab4_cliente.html")
 
 # ==========================
 #  3. EJECUCION
