@@ -3,8 +3,6 @@ Primera Aplicación con FastAPI
 
 Probar con el navegador web :
 
-    http://localhost:8040/
-    http://localhost:8040/saludo/Ana
     http://localhost:8040/docs
 
 
